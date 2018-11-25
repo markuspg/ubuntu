@@ -67,38 +67,19 @@ get_short_description() {
     RAW_VERSION=${RAW_VERSION%-desktop}
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
-    17.04)
-        PRETTY_VERSION="17.04 Zesty Zapus"
-        ;;
-    16.10)
-        PRETTY_VERSION="16.10 Yakkety Yak"
+    18.04)
+        PRETTY_VERSION="18.04.1 Bionic Beaver"
         ;;
     16.04)
-        PRETTY_VERSION="16.04.3 Xenial Xerus"
-        ;;
-    15.10)
-        PRETTY_VERSION="15.10 Wily Werewolf"
-        ;;
-    15.04)
-        PRETTY_VERSION="15.04 Vivid Vervet"
-        ;;
-    14.10)
-        PRETTY_VERSION="14.10 Utopic Unicorn"
+        PRETTY_VERSION="16.04.5 Xenial Xerus"
         ;;
     14.04)
         PRETTY_VERSION="14.04.5 LTS Trusty Tahr"
         ;;
-    12.04)
-        PRETTY_VERSION="12.04.5 LTS Precise Pangolin"
-        ;;
-    10.04)
-        PRETTY_VERSION="10.04.4 LTS Lucid Lynx"
-        ;;
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
-    VMWARE_VERSION=10.0.10
+    VMWARE_VERSION=10.1.1
     SHORT_DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}"
 }
 
@@ -124,39 +105,22 @@ create_description() {
     RAW_VERSION=${RAW_VERSION%-desktop}
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
-    16.10)
-        PRETTY_VERSION="16.10 Yakkety Yak"
+    18.04)
+        PRETTY_VERSION="18.04.1 Bionic Beaver"
         ;;
     16.04)
-        PRETTY_VERSION="16.04.3 Xenial Xerus"
-        ;;
-    15.10)
-        PRETTY_VERSION="15.10 Wily Werewolf"
-        ;;
-    15.04)
-        PRETTY_VERSION="15.04 Vivid Vervet"
-        ;;
-    14.10)
-        PRETTY_VERSION="14.10 Utopic Unicorn"
+        PRETTY_VERSION="16.04.5 Xenial Xerus"
         ;;
     14.04)
         PRETTY_VERSION="14.04.5 LTS Trusty Tahr"
         ;;
-    12.04)
-        PRETTY_VERSION="12.04.5 LTS Precise Pangolin"
-        ;;
-    10.04)
-        PRETTY_VERSION="10.04.4 LTS Lucid Lynx"
-        ;;
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
-    VMWARE_VERSION=10.0.10
+    VMWARE_VERSION=10.1.1
 
     VMWARE_BOX_FILE=box/vmware/${BOX_NAME}${BOX_SUFFIX}
     VIRTUALBOX_BOX_FILE=box/virtualbox/${BOX_NAME}${BOX_SUFFIX}
-    PARALLELS_BOX_FILE=box/parallels/${BOX_NAME}${BOX_SUFFIX}
     DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}
 
 "
@@ -167,10 +131,6 @@ create_description() {
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         FILESIZE=$(du -k -h "${VIRTUALBOX_BOX_FILE}" | cut -f1)
         DESCRIPTION=${DESCRIPTION}"VirtualBox ${FILESIZE}B/"
-    fi
-    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
-        FILESIZE=$(du -k -h "${PARALLELS_BOX_FILE}" | cut -f1)
-        DESCRIPTION=${DESCRIPTION}"Parallels ${FILESIZE}B/"
     fi
     DESCRIPTION=${DESCRIPTION%?}
 
@@ -183,11 +143,6 @@ VMware Tools ${VMWARE_VERSION}"
         DESCRIPTION="${DESCRIPTION}
 
 VirtualBox Guest Additions ${VIRTUALBOX_VERSION}"
-    fi
-    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
-        DESCRIPTION="${DESCRIPTION}
-
-Parallels Tools ${PARALLELS_VERSION}"
     fi
 
     VERSION_JSON=$(
@@ -260,11 +215,6 @@ atlas_publish() {
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         PROVIDER=virtualbox
         PROVIDER_URL=${BOXCUTTER_BASE_URL}/virtualbox${VIRTUALBOX_VERSION}/${BOX_NAME}${BOX_SUFFIX}
-        publish_provider ${atlas_username} ${atlas_access_token}
-    fi
-    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
-        PROVIDER=parallels
-        PROVIDER_URL=${BOXCUTTER_BASE_URL}/parallels${PARALLELS_VERSION}/${BOX_NAME}${BOX_SUFFIX}
         publish_provider ${atlas_username} ${atlas_access_token}
     fi
 

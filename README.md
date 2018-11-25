@@ -10,13 +10,7 @@ Pre-built boxes can be found here: [vagrantup](https://app.vagrantup.com/fasmat)
 
 ## Building the Vagrant boxes with Packer
 
-To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads), 
-[VMware Fusion](https://www.vmware.com/products/fusion)/[VMware Workstation](https://www.vmware.com/products/workstation) and
-[Parallels](http://www.parallels.com/products/desktop/whats-new/) installed.
-
-Parallels requires that the
-[Parallels Virtualization SDK for Mac](http://www.parallels.com/downloads/desktop)
-be installed as an additional preqrequisite.
+To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) installed.
 
 We make use of JSON files containing user variables to build specific versions of Ubuntu.
 You tell `packer` to use a specific user variable file via the `-var-file=` command line
@@ -34,7 +28,6 @@ parameter.  For example, to build Ubuntu 18.04 for VirtualBox:
 
 The boxcutter templates currently support the following desktop virtualization strings:
 
-* `parallels-iso` - [Parallels](http://www.parallels.com/products/desktop/whats-new/) desktop virtualization (Requires the Pro Edition - Desktop edition won't work)
 * `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
 * `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
 
