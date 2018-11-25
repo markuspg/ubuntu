@@ -88,13 +88,22 @@
       "type": "virtualbox-iso",
       "vboxmanage": [
         [
-          "modifyvm", "{{.Name}}", "--nictype1", "virtio"
+          "modifyvm",
+          "{{.Name}}",
+          "--nictype1",
+          "virtio"
         ],
         [
-          "modifyvm", "{{.Name}}", "--memory", "{{ user `memory` }}"
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "{{ user `memory` }}"
         ],
         [
-          "modifyvm", "{{.Name}}", "--cpus", "{{ user `cpus` }}"
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "{{ user `cpus` }}"
         ]
       ],
       "virtualbox_version_file": ".vbox_version",
@@ -134,10 +143,16 @@
       "parallels_tools_flavor": "lin",
       "prlctl": [
         [
-          "set", "{{.Name}}", "--memsize", "{{ user `memory` }}"
+          "set",
+          "{{.Name}}",
+          "--memsize",
+          "{{ user `memory` }}"
         ],
         [
-          "set", "{{.Name}}", "--cpus", "{{ user `cpus` }}"
+          "set",
+          "{{.Name}}",
+          "--cpus",
+          "{{ user `cpus` }}"
         ]
       ],
       "prlctl_version_file": ".prlctl_version",
@@ -212,7 +227,7 @@
     "memory": "512",
     "no_proxy": "{{env `no_proxy`}}",
     "parallels_guest_os_type": "ubuntu",
-    "preseed" : "preseed.cfg",
+    "preseed": "preseed.cfg",
     "rsync_proxy": "{{env `rsync_proxy`}}",
     "hostname": "vagrant",
     "ssh_fullname": "vagrant",

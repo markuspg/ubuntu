@@ -6,7 +6,7 @@ This repository contains [Packer](https://packer.io/) templates for creating Ubu
 
 ## Current Boxes
 
-We no longer provide pre-built binaries for these templates.
+Pre-built boxes can be found here: [vagrantup](https://app.vagrantup.com/fasmat)
 
 ## Building the Vagrant boxes with Packer
 
@@ -138,28 +138,12 @@ The default is `custom-script.sh` which does nothing.
 
 ## Contributing
 
-
 1. Fork and clone the repo.
 2. Create a new branch, please don't work in your `master` branch directly.
-3. Add new [Serverspec](http://serverspec.org/) or [Bats](https://blog.engineyard.com/2014/bats-test-command-line-tools) tests in the `test/` subtree for the change you want to make.  Run `make test` on a relevant template to see the tests fail (like `make test-virtualbox/ubuntu1804`).
+3. Add new [Serverspec](http://serverspec.org/) tests in the `test/` subtree for the change you want to make.  Run `make test` on a relevant template to see the tests fail (like `make test-virtualbox/ubuntu1804`).
 4. Fix stuff.  Use `make ssh` to interactively test your box (like `make ssh-virtualbox/ubuntu1804`).
 5. Run `make test` on a relevant template (like `make test-virtualbox/ubuntu1804`) to see if the tests pass.  Repeat steps 3-5 until done.
 6. Update `README.md` and `AUTHORS` to reflect any changes.
 7. If you have a large change in mind, it is still preferred that you split them into small commits.  Good commit messages are important.  The git documentatproject has some nice guidelines on [writing descriptive commit messages](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).
 8. Push to your fork and submit a pull request.
 9. Once submitted, a full `make test` run will be performed against your change in the build farm.  You will be notified if the test suite fails.
-
-### Would you like to help out more?
-
-Contact moujan@annawake.com 
-
-### Acknowledgments
-
-[Parallels](http://www.parallels.com/) provided a Business Edition license of
-their software to run on the basebox build farm.
-
-<img src="http://www.parallels.com/fileadmin/images/corporate/brand-assets/images/logo-knockout-on-red.jpg" width="80">
-
-[SmartyStreets](http://www.smartystreets.com) provided basebox hosting for the box-cutter project since 2015 - thank you for your support!
-
-<img src="https://d79i1fxsrar4t.cloudfront.net/images/brand/smartystreets.65887aa3.png" width="320">
