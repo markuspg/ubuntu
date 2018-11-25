@@ -4,7 +4,6 @@
 # Force Unix-style line endings on these files
 *.sh eol=lf
 ks.cfg eol=lf
-preseed.cfg eol=lf
 
 # Force CRLF line endings on these files
 *.bat text eol=crlf
