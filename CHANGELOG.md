@@ -1,5 +1,9 @@
 # Changelog
 
+## 19.0218.01
+
+* Update Ubuntu bionic box to 2nd point release
+
 ## 18.1125.01
 
 * Fix autologin not working in Ubuntu 18.04
