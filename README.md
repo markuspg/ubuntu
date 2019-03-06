@@ -1,6 +1,6 @@
 # Packer templates for Ubuntu
 
-### Overview
+## Overview
 
 This repository contains [Packer](https://packer.io/) templates for creating Ubuntu Vagrant boxes.
 
@@ -19,12 +19,16 @@ which builds Ubuntu 18.04 by default.
 
 For example, to build Ubuntu 18.04, use the following:
 
-    $ packer build -var-file=ubuntu1804.json ubuntu.json
+```bash
+packer build -var-file=ubuntu1804.json ubuntu.json
+```
 
 If you want to make boxes for a specific desktop virtualization platform, use the `-only`
 parameter.  For example, to build Ubuntu 18.04 for VirtualBox:
 
-    $ packer build -only=virtualbox-iso -var-file=ubuntu1804.json ubuntu.json
+```bash
+packer build -only=virtualbox-iso -var-file=ubuntu1804.json ubuntu.json
+```
 
 The boxcutter templates currently support the following desktop virtualization strings:
 
@@ -36,11 +40,15 @@ The boxcutter templates currently support the following desktop virtualization s
 We've also provided a wrapper script `bin/box` for ease of use, so alternatively, you can use
 the following to build Ubuntu 18.04 for all providers:
 
-    $ bin/box build ubuntu1804
+```bash
+bin/box build ubuntu1804
+```
 
 Or if you just want to build Ubuntu 18.04 for VirtualBox:
 
-    $ bin/box build ubuntu1804 virtualbox
+```bash
+bin/box build ubuntu1804 virtualbox
+```
 
 ## Building the Vagrant boxes with the Makefile
 
@@ -53,10 +61,12 @@ A GNU Make `Makefile` drives a complete basebox creation pipeline with the follo
 The pipeline is driven via the following targets, making it easy for you to include them
 in your favourite CI tool:
 
-    make build   # Build all available box types
-    make assure  # Run tests against all the boxes
-    make deliver # Upload box artifacts to a repository
-    make clean   # Clean up build detritus
+```bash
+make build   # Build all available box types
+make assure  # Run tests against all the boxes
+make deliver # Upload box artifacts to a repository
+make clean   # Clean up build detritus
+```
 
 ### Proxy Settings
 
@@ -75,7 +85,9 @@ process, should you be using a proxy:
 Automated tests are written in [Serverspec](http://serverspec.org) and require
 the `vagrant-serverspec` plugin to be installed with:
 
-    vagrant plugin install vagrant-serverspec
+```bash
+vagrant plugin install vagrant-serverspec
+```
 
 The `bin/box` script has subcommands for running both the automated tests
 and for performing exploratory testing.
@@ -84,12 +96,16 @@ Use the `bin/box test` subcommand to run the automated Serverspec tests.
 For example to execute the tests for the Ubuntu 18.04 box on VirtualBox, use
 the following:
 
-    bin/box test ubuntu1804 virtualbox
+```bash
+bin/box test ubuntu1804 virtualbox
+```
 
 Similarly, to perform exploratory testing on the VirtualBox image via ssh,
 run the following command:
 
-    bin/box ssh ubuntu1804 virtualbox
+```bash
+bin/box ssh ubuntu1804 virtualbox
+```
 
 ### Variable overrides
 
