@@ -1,6 +1,7 @@
 #!/bin/bash
 
-date > /etc/box_build_time
+echo "==> Recording box generation date"
+date > /etc/vagrant_box_build_date
 
 SSH_USER=${SSH_USERNAME:-vagrant}
 SSH_PASS=${SSH_PASSWORD:-vagrant}

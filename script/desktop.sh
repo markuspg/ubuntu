@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ ! "$DESKTOP" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]]; then
-  exit
+    exit
 fi
 
 SSH_USER=${SSH_USERNAME:-vagrant}
@@ -16,33 +16,55 @@ USERNAME=${SSH_USER}
 LIGHTDM_CONFIG=/etc/lightdm/lightdm.conf
 GDM_CUSTOM_CONFIG=/etc/gdm3/custom.conf
 
+# Ubuntu 18.04 uses GDM
 if [ -f $GDM_CUSTOM_CONFIG ]; then
     mkdir -p $(dirname ${GDM_CUSTOM_CONFIG})
-    > $GDM_CUSTOM_CONFIG
-    echo "[daemon]" >> $GDM_CUSTOM_CONFIG
-    echo "# Enabling automatic login" >> $GDM_CUSTOM_CONFIG
-    echo "AutomaticLoginEnable = true" >> $GDM_CUSTOM_CONFIG
-    echo "AutomaticLogin = ${USERNAME}" >> $GDM_CUSTOM_CONFIG
+    >$GDM_CUSTOM_CONFIG
+    echo "[daemon]" >>$GDM_CUSTOM_CONFIG
+    echo "# Enabling automatic login" >>$GDM_CUSTOM_CONFIG
+    echo "AutomaticLoginEnable = true" >>$GDM_CUSTOM_CONFIG
+    echo "AutomaticLogin = ${USERNAME}" >>$GDM_CUSTOM_CONFIG
 fi
 
+# Ubuntu 16.04 uses LightDM
 if [ -f $LIGHTDM_CONFIG ]; then
     echo "==> Configuring lightdm autologin"
-    echo "[SeatDefaults]" >> $LIGHTDM_CONFIG
-    echo "autologin-user=${USERNAME}" >> $LIGHTDM_CONFIG
-    echo "autologin-user-timeout=0" >> $LIGHTDM_CONFIG
+    echo "[SeatDefaults]" >>$LIGHTDM_CONFIG
+    echo "autologin-user=${USERNAME}" >>$LIGHTDM_CONFIG
+    echo "autologin-user-timeout=0" >>$LIGHTDM_CONFIG
 fi
 
 if [ -d /etc/xdg/autostart/ ]; then
     echo "==> Disabling screen blanking"
     NODPMS_CONFIG=/etc/xdg/autostart/nodpms.desktop
-    echo "[Desktop Entry]" >> $NODPMS_CONFIG
-    echo "Type=Application" >> $NODPMS_CONFIG
-    echo "Exec=xset -dpms s off s noblank s 0 0 s noexpose" >> $NODPMS_CONFIG
-    echo "Hidden=false" >> $NODPMS_CONFIG
-    echo "NoDisplay=false" >> $NODPMS_CONFIG
-    echo "X-GNOME-Autostart-enabled=true" >> $NODPMS_CONFIG
-    echo "Name[en_US]=nodpms" >> $NODPMS_CONFIG
-    echo "Name=nodpms" >> $NODPMS_CONFIG
-    echo "Comment[en_US]=" >> $NODPMS_CONFIG
-    echo "Comment=" >> $NODPMS_CONFIG
+    echo "[Desktop Entry]" >>$NODPMS_CONFIG
+    echo "Type=Application" >>$NODPMS_CONFIG
+    echo "Name=nodpms" >>$NODPMS_CONFIG
+    echo "Comment=" >>$NODPMS_CONFIG
+    echo "Exec=xset -dpms s off s noblank s 0 0 s noexpose" >>$NODPMS_CONFIG
+    echo "Hidden=false" >>$NODPMS_CONFIG
+    echo "NoDisplay=false" >>$NODPMS_CONFIG
+    echo "X-GNOME-Autostart-enabled=true" >>$NODPMS_CONFIG
+
+    echo "==> Disabling screensaver"
+    IDLE_DELAY_CONFIG=/etc/xdg/autostart/idle-delay.desktop
+    echo "[Desktop Entry]" >>$IDLE_DELAY_CONFIG
+    echo "Type=Application" >>$IDLE_DELAY_CONFIG
+    echo "Name=idle-delay" >>$IDLE_DELAY_CONFIG
+    echo "Comment=" >>$IDLE_DELAY_CONFIG
+    echo "Exec=gsettings set org.gnome.desktop.session idle-delay 0" >>$IDLE_DELAY_CONFIG
+    echo "Hidden=false" >>$IDLE_DELAY_CONFIG
+    echo "NoDisplay=false" >>$IDLE_DELAY_CONFIG
+    echo "X-GNOME-Autostart-enabled=true" >>$IDLE_DELAY_CONFIG
+
+    echo "==> Add German input source"
+    INPUT_SOURCE_CONFIG=/etc/xdg/autostart/input-source.desktop
+    echo "[Desktop Entry]" >>$INPUT_SOURCE_CONFIG
+    echo "Type=Application" >>$INPUT_SOURCE_CONFIG
+    echo "Name=idle-delay" >>$INPUT_SOURCE_CONFIG
+    echo "Comment=" >>$INPUT_SOURCE_CONFIG
+    echo "Exec=gsettings set org.gnome.desktop.input-sources \"[('xkb', 'de'), ('xkb', 'us')]\"" >>$INPUT_SOURCE_CONFIG
+    echo "Hidden=false" >>$INPUT_SOURCE_CONFIG
+    echo "NoDisplay=false" >>$INPUT_SOURCE_CONFIG
+    echo "X-GNOME-Autostart-enabled=true" >>$INPUT_SOURCE_CONFIG
 fi

@@ -9,9 +9,9 @@ usage() {
   echo "usage: $(basename $0) [-h/--help] command [arguments...]"
   echo
   echo "Available commands are:"
-  echo "    build  Generate a box image file"
-  echo "    ssh    Run vagrant ssh against a box image name"
-  echo "    test   Run serverspec tests against a box image name"
+  echo "    build       Generate a box image file"
+  echo "    test        Run serverspec tests against a box image name"
+  echo "    test-cloud  Download box from vagrant cloud and run serverspec tests against it"
 }
 
 args() {
@@ -20,7 +20,7 @@ args() {
     exit 0
   fi
 
-  if [[ ! $1 =~ ^(build|ssh|test)$ ]]; then
+  if [[ ! $1 =~ ^(build|test|test-cloud)$ ]]; then
     echo "$(basename $0): illegal option $1"
     usage
     exit 1
@@ -38,12 +38,12 @@ args() {
   $command "$@"
 }
 
-ssh() {
-  bin/ssh-box "$@"
-}
-
 test() {
   bin/test-box "$@"
+}
+
+test-cloud() {
+  bin/test-cloud-box "$@"
 }
 
 build() {
