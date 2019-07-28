@@ -3,7 +3,7 @@ set -o nounset # Treat unset variables as an error and immediately exit
 set -o errexit # If a command fails exit the whole script
 
 if [ "${DEBUG:-false}" = "true" ]; then
-  set -x # Run the entire script in debug mode
+    set -x # Run the entire script in debug mode
 fi
 
 usage() {
@@ -61,13 +61,10 @@ get_short_description() {
     16.04)
         PRETTY_VERSION="16.04.5 Xenial Xerus"
         ;;
-    14.04)
-        PRETTY_VERSION="14.04.5 LTS Trusty Tahr"
-        ;;
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    VMWARE_VERSION=10.1.1
+    VMWARE_VERSION="1.17.0 build-13668589"
     SHORT_DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}"
 }
 
@@ -98,9 +95,6 @@ create_description() {
         ;;
     16.04)
         PRETTY_VERSION="16.04.5 Xenial Xerus"
-        ;;
-    14.04)
-        PRETTY_VERSION="14.04.5 LTS Trusty Tahr"
         ;;
     esac
 
@@ -134,7 +128,7 @@ VirtualBox Guest Additions ${VIRTUALBOX_VERSION}"
     fi
 
     VERSION_JSON=$(
-      jq -n "{
+        jq -n "{
         version: {
           version: \"${VERSION}\",
           description: \"${DESCRIPTION}\"
@@ -166,7 +160,8 @@ publish_provider() {
                 provider: {
                     name: \"${PROVIDER}\"
                 }
-            }")
+            }"
+        )
 
         curl \
             --header "Content-Type: application/json" \
@@ -176,15 +171,15 @@ publish_provider() {
     fi
 
     FILE=""
-    if [[ "vmware_desktop" = "${PROVIDER}" ]]; then
+    if [[ "vmware_desktop" == "${PROVIDER}" ]]; then
         FILE=${VMWARE_BOX_FILE}
-    elif [[ "virtualbox" = "${PROVIDER}" ]]; then
+    elif [[ "virtualbox" == "${PROVIDER}" ]]; then
         FILE=${VIRTUALBOX_BOX_FILE}
     fi
 
     RESULT=$(curl \
-            --header "Authorization: Bearer ${atlas_access_token}" \
-            "${ATLAS_API_URL}/box/${atlas_username}/${BOX_NAME}/version/${VERSION}/provider/${PROVIDER}/upload")
+        --header "Authorization: Bearer ${atlas_access_token}" \
+        "${ATLAS_API_URL}/box/${atlas_username}/${BOX_NAME}/version/${VERSION}/provider/${PROVIDER}/upload")
     UPLOAD_PATH=$(echo "$RESULT" | jq -r .upload_path)
     curl "$UPLOAD_PATH" --request PUT --upload-file $FILE
 }
@@ -212,7 +207,8 @@ atlas_publish() {
                     short_description: \"${SHORT_DESCRIPTION}\",
                     is_private: false
                 }
-            }")
+            }"
+        )
 
         curl -s \
             --header "Content-Type: application/json" \

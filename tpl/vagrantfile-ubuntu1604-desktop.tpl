@@ -15,8 +15,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end
 
-    ["vmware_fusion", "vmware_workstation"].each do |provider|
-      config.vm.provider provider do |v, override|
+    config.vm.provider :vmware_desktop do |v, override|
         v.gui = true
         v.vmx["memsize"] = "1024"
         v.vmx["numvcpus"] = "1"
@@ -25,6 +24,5 @@ Vagrant.configure("2") do |config|
         v.vmx["RemoteDisplay.vnc.port"] = "5900"
         v.vmx["scsi0.virtualDev"] = "lsilogic"
         v.vmx["mks.enable3d"] = "TRUE"
-      end
     end
 end
