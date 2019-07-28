@@ -3,6 +3,7 @@
 ## upcoming release
 
 * Update Ubuntu xenial box to 6th point release
+  * Fix auto-login
 * Cleanup of scripts
   * removal of trusty specific code
   * removal of unused scripts

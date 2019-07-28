@@ -27,7 +27,7 @@ if [ -f $GDM_CUSTOM_CONFIG ]; then
 fi
 
 # Ubuntu 16.04 uses LightDM
-if [ -f $LIGHTDM_CONFIG ]; then
+if [ -d $(dirname $LIGHTDM_CONFIG) ]; then
     echo "==> Configuring lightdm autologin"
     echo "[SeatDefaults]" >>$LIGHTDM_CONFIG
     echo "autologin-user=${USERNAME}" >>$LIGHTDM_CONFIG
@@ -56,15 +56,4 @@ if [ -d /etc/xdg/autostart/ ]; then
     echo "Hidden=false" >>$IDLE_DELAY_CONFIG
     echo "NoDisplay=false" >>$IDLE_DELAY_CONFIG
     echo "X-GNOME-Autostart-enabled=true" >>$IDLE_DELAY_CONFIG
-
-    echo "==> Add German input source"
-    INPUT_SOURCE_CONFIG=/etc/xdg/autostart/input-source.desktop
-    echo "[Desktop Entry]" >>$INPUT_SOURCE_CONFIG
-    echo "Type=Application" >>$INPUT_SOURCE_CONFIG
-    echo "Name=idle-delay" >>$INPUT_SOURCE_CONFIG
-    echo "Comment=" >>$INPUT_SOURCE_CONFIG
-    echo "Exec=gsettings set org.gnome.desktop.input-sources \"[('xkb', 'de'), ('xkb', 'us')]\"" >>$INPUT_SOURCE_CONFIG
-    echo "Hidden=false" >>$INPUT_SOURCE_CONFIG
-    echo "NoDisplay=false" >>$INPUT_SOURCE_CONFIG
-    echo "X-GNOME-Autostart-enabled=true" >>$INPUT_SOURCE_CONFIG
 fi
