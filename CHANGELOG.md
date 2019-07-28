@@ -9,6 +9,7 @@
   * removal of unused scripts
   * minimize is now used, during the build
 * The screensaver is now disabled by default
+* LibreOffice and some Gnome Tools have been removed to decrease the size of the boxes
 
 ## 19.0218.01
 

@@ -13,8 +13,10 @@ echo "==> Removing documentation"
 dpkg --list | awk '{ print $2 }' | grep -- '-doc$' | xargs apt-get -y purge
 echo "==> Removing obsolete networking components"
 apt-get -y purge ppp pppconfig pppoeconf
+echo "==> Removing LibreOffice"
+apt-get -y purge libreoffice-core libreoffice-calc libreoffice-common libreoffice-draw libreoffice-gtk libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-gtk libreoffice-ogltrans libreoffice-pdfimport libreoffice-writer
 echo "==> Removing other oddities"
-apt-get -y purge popularity-contest installation-report landscape-common
+apt-get -y purge popularity-contest installation-report landscape-common aisleriot gnome-mines gnome-mahjongg gnome-sudoku rhythmbox rhythmbox-data libtotem-plparser-common transmission-common simple-scan thunderbird ubuntu-docs
 
 # Clean up the apt cache
 apt-get -y autoremove --purge
