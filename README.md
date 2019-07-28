@@ -102,14 +102,7 @@ For example to execute the tests for the Ubuntu 18.04 box on VirtualBox, use
 the following:
 
 ```bash
-bin/box test ubuntu1804 virtualbox
-```
-
-Similarly, to perform exploratory testing on the VirtualBox image via ssh,
-run the following command:
-
-```bash
-bin/box ssh ubuntu1804 virtualbox
+bin/box test ubuntu1804-desktop virtualbox
 ```
 
 ### Variable overrides
