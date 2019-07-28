@@ -4,53 +4,54 @@ BUILDER_TYPES ?= vmware virtualbox
 TEMPLATE_FILENAMES := $(filter-out ubuntu.json,$(wildcard *.json))
 BOX_NAMES := $(basename $(TEMPLATE_FILENAMES))
 BOX_FILENAMES := $(TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
+
 VMWARE_BOX_DIR ?= box/vmware
 VMWARE_TEMPLATE_FILENAMES = $(TEMPLATE_FILENAMES)
 VMWARE_BOX_FILENAMES := $(VMWARE_TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
 VMWARE_BOX_FILES := $(foreach box_filename, $(VMWARE_BOX_FILENAMES), $(VMWARE_BOX_DIR)/$(box_filename))
+
 VIRTUALBOX_BOX_DIR ?= box/virtualbox
 VIRTUALBOX_TEMPLATE_FILENAMES = $(TEMPLATE_FILENAMES)
 VIRTUALBOX_BOX_FILENAMES := $(VIRTUALBOX_TEMPLATE_FILENAMES:.json=$(BOX_SUFFIX))
 VIRTUALBOX_BOX_FILES := $(foreach box_filename, $(VIRTUALBOX_BOX_FILENAMES), $(VIRTUALBOX_BOX_DIR)/$(box_filename))
+
 BOX_FILES := $(VMWARE_BOX_FILES) $(VIRTUALBOX_BOX_FILES)
 
 box/vmware/%$(BOX_SUFFIX) box/virtualbox/%$(BOX_SUFFIX): %.json
 	bin/box build $<
 
-.PHONY: all clean assure deliver assure_atlas assure_atlas_vmware assure_atlas_virtualbox
+.PHONY: all clean test deliver test_cloud test_vmware test_virtualbox test_cloud_vmware test_cloud_virtualbox
 
-all: build assure deliver
+all: build test deliver
 
 build: $(BOX_FILES)
 
-assure: assure_vmware assure_virtualbox
+test: test_vmware test_virtualbox
 
-assure_vmware: $(VMWARE_BOX_FILES)
+test_vmware: $(VMWARE_BOX_FILES)
 	@for vmware_box_file in $(VMWARE_BOX_FILES) ; do \
 		echo Checking $$vmware_box_file ; \
 		bin/box test $$vmware_box_file vmware ; \
 	done
 
-assure_virtualbox: $(VIRTUALBOX_BOX_FILES)
+test_virtualbox: $(VIRTUALBOX_BOX_FILES)
 	@for virtualbox_box_file in $(VIRTUALBOX_BOX_FILES) ; do \
 		echo Checking $$virtualbox_box_file ; \
 		bin/box test $$virtualbox_box_file virtualbox ; \
 	done
 
-assure_atlas: assure_atlas_vmware assure_atlas_virtualbox
+test_cloud: test_cloud_vmware test_cloud_virtualbox
 
-assure_atlas_vmware:
+test_cloud_vmware:
 	@for box_name in $(BOX_NAMES) ; do \
 		echo Checking $$box_name ; \
-		bin/test-vagrantcloud-box box-cutter/$$box_name vmware ; \
-		bin/test-vagrantcloud-box boxcutter/$$box_name vmware ; \
+		bin/test-cloud-box fasmat/$$box_name vmware ; \
 	done
 
-assure_atlas_virtualbox:
+test_cloud_virtualbox:
 	@for box_name in $(BOX_NAMES) ; do \
 		echo Checking $$box_name ; \
-		bin/test-vagrantcloud-box box-cutter/$$box_name virtualbox ; \
-		bin/test-vagrantcloud-box boxcutter/$$box_name virtualbox ; \
+		bin/test-cloud-box fasmat/$$box_name virtualbox ; \
 	done
 
 deliver:

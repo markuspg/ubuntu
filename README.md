@@ -10,7 +10,9 @@ Pre-built boxes can be found here: [vagrantup](https://app.vagrantup.com/fasmat)
 
 ## Building the Vagrant boxes with Packer
 
-To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) installed.
+To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and
+[VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation)
+installed.
 
 We make use of JSON files containing user variables to build specific versions of Ubuntu.
 You tell `packer` to use a specific user variable file via the `-var-file=` command line
@@ -32,8 +34,10 @@ packer build -only=virtualbox-iso -var-file=ubuntu1804.json ubuntu.json
 
 The boxcutter templates currently support the following desktop virtualization strings:
 
-* `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads) desktop virtualization
-* `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
+* `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+  desktop virtualization
+* `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or
+  [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
 
 ## Building the Vagrant boxes with the box script
 
@@ -54,18 +58,19 @@ bin/box build ubuntu1804 virtualbox
 
 A GNU Make `Makefile` drives a complete basebox creation pipeline with the following stages:
 
-* `build` - Create basebox `*.box` files
-* `assure` - Verify that the basebox `*.box` files produced function correctly
-* `deliver` - Upload `*.box` files to [Artifactory](https://www.jfrog.com/confluence/display/RTF/Vagrant+Repositories), [Atlas](https://atlas.hashicorp.com/) or an [S3 bucket](https://aws.amazon.com/s3/)
+* `build`   - Create basebox `*.box` files
+* `test`    - Verify that the basebox `*.box` files produced function correctly
+* `deliver` - Upload `*.box` files to [Vagrant Cloud](https://app.vagrantup.com)
 
 The pipeline is driven via the following targets, making it easy for you to include them
-in your favourite CI tool:
+in your favorite CI tool:
 
 ```bash
-make build   # Build all available box types
-make assure  # Run tests against all the boxes
-make deliver # Upload box artifacts to a repository
-make clean   # Clean up build detritus
+make build       # Build all available box types
+make test        # Run tests against all the boxes
+make deliver     # Upload box artifacts to a repository
+make test-cloud  # Test deployed boxes (after downloading them)
+make clean       # Clean up build detritus
 ```
 
 ### Proxy Settings
@@ -89,10 +94,10 @@ the `vagrant-serverspec` plugin to be installed with:
 vagrant plugin install vagrant-serverspec
 ```
 
-The `bin/box` script has subcommands for running both the automated tests
+The `bin/box` script has sub-commands for running both the automated tests
 and for performing exploratory testing.
 
-Use the `bin/box test` subcommand to run the automated Serverspec tests.
+Use the `bin/box test` sub-command to run the automated Serverspec tests.
 For example to execute the tests for the Ubuntu 18.04 box on VirtualBox, use
 the following:
 
@@ -134,7 +139,7 @@ by pointing at pre-downloaded ISOs instead of using the default download
 Internet URLs.
 
 The variables `SSH_USERNAME` and `SSH_PASSWORD` can be used to change the
- default name & password from the default `vagrant`/`vagrant` respectively.
+default name & password from the default `vagrant`/`vagrant` respectively.
 
 The variable `INSTALL_VAGRANT_KEY` can be set to turn off installation of the
 default insecure vagrant key when the image is being used outside of vagrant.
@@ -147,12 +152,12 @@ The default is `custom-script.sh` which does nothing.
 
 ## Contributing
 
-1. Fork and clone the repo.
+1. Fork and clone the repository.
 2. Create a new branch, please don't work in your `master` branch directly.
-3. Add new [Serverspec](http://serverspec.org/) tests in the `test/` subtree for the change you want to make.  Run `make test` on a relevant template to see the tests fail (like `make test-virtualbox/ubuntu1804`).
-4. Fix stuff.  Use `make ssh` to interactively test your box (like `make ssh-virtualbox/ubuntu1804`).
-5. Run `make test` on a relevant template (like `make test-virtualbox/ubuntu1804`) to see if the tests pass.  Repeat steps 3-5 until done.
+3. Add new [Serverspec](http://serverspec.org/) tests in the `test/` subtree for the change you want to make.
+4. Fix stuff if necessary.
+5. Run `make test` to test all templates or `bin/box test` on individual boxes to see if the tests pass. Repeat steps 3-5 until done.
 6. Update `README.md` and `AUTHORS` to reflect any changes.
-7. If you have a large change in mind, it is still preferred that you split them into small commits.  Good commit messages are important.  The git documentatproject has some nice guidelines on [writing descriptive commit messages](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).
+7. If you have a large change in mind, it is still preferred that you split them into small commits.  Good commit messages are important.
+   The git project has some nice guidelines on [writing descriptive commit messages](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).
 8. Push to your fork and submit a pull request.
-9. Once submitted, a full `make test` run will be performed against your change in the build farm.  You will be notified if the test suite fails.
