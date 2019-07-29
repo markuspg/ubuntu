@@ -64,7 +64,7 @@ get_short_description() {
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    VMWARE_VERSION="1.17.0 build-13668589"
+    VMWARE_VERSION=$(vmrun | sed -n '2p' | awk '{print $(NF-1)}')
     SHORT_DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}"
 }
 
@@ -99,7 +99,7 @@ create_description() {
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
-    VMWARE_VERSION=10.1.1
+    VMWARE_VERSION=$(vmrun | sed -n '2p' | awk '{print $(NF-1)}')
 
     VMWARE_BOX_FILE=box/vmware/${BOX_NAME}${BOX_SUFFIX}
     VIRTUALBOX_BOX_FILE=box/virtualbox/${BOX_NAME}${BOX_SUFFIX}

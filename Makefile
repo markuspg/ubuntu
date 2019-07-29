@@ -57,7 +57,7 @@ test_cloud_virtualbox:
 deliver:
 	@for box_name in $(BOX_NAMES) ; do \
 		echo Uploading $$box_name to Atlas ; \
-		bin/register_atlas.sh $$box_name $(BOX_SUFFIX) $(BOX_VERSION) ; \
+		bin/register_cloud.sh $$box_name $(BOX_SUFFIX) $(BOX_VERSION) ; \
 	done
 
 clean:
