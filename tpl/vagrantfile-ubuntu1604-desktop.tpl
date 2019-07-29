@@ -4,7 +4,7 @@ Vagrant.configure("2") do |config|
 
     config.vm.provider :virtualbox do |v, override|
         v.gui = true
-        v.customize ["modifyvm", :id, "--name", "fasmat's Ubuntu 16.04"]
+        v.customize ["modifyvm", :id, "--name", "Ubuntu 16.04"]
         v.customize ["modifyvm", :id, "--memory", 4096]
         v.customize ["modifyvm", :id, "--cpus", 4]
         v.customize ["modifyvm", :id, "--vram", "256"]

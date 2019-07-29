@@ -35,13 +35,13 @@ args() {
       vagrant_provider=vmware_workstation
     fi
   fi
-  SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   test_src_path=${SCRIPT_DIR}/../test/*_spec.rb
 }
 
 create_vagrantfile_linux() {
   vagrant plugin list | grep vagrant-serverspec && echo "vagrant-serverspec installed" || vagrant plugin install vagrant-serverspec
-  cat << EOF > ${tmp_path}/Vagrantfile
+  cat <<EOF >${tmp_path}/Vagrantfile
 Vagrant.configure('2') do |config|
 config.vm.box = '$box_name'
 
