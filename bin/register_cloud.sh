@@ -56,10 +56,10 @@ get_short_description() {
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
     18.04)
-        PRETTY_VERSION="18.04.2 Bionic Beaver"
+        PRETTY_VERSION="18.04.3 Bionic Beaver"
         ;;
     16.04)
-        PRETTY_VERSION="16.04.5 Xenial Xerus"
+        PRETTY_VERSION="16.04.6 Xenial Xerus"
         ;;
     esac
 
@@ -91,10 +91,10 @@ create_description() {
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
     18.04)
-        PRETTY_VERSION="18.04.2 Bionic Beaver"
+        PRETTY_VERSION="18.04.3 Bionic Beaver"
         ;;
     16.04)
-        PRETTY_VERSION="16.04.5 Xenial Xerus"
+        PRETTY_VERSION="16.04.6 Xenial Xerus"
         ;;
     esac
 
