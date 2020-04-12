@@ -2,18 +2,13 @@ packer_cache/
 output-*
 *.box
 *.tar.gz
-iso
+*.iso
 crash.log
 tmp
 .vagrant/
 *.swp
 Makefile.local
 .tmpatlas/
-iso/
 
 .DS_Store
 .bundle/
-
-custom.sh
-script/custom/*
-!script/custom/.gitkeep
