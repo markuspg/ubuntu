@@ -6,6 +6,8 @@
 * Update Ubuntu Bionic to 4th point release
 * Add support for Ubuntu Focal by building the current beta
 * German input source is now added again when building the box
+* Cleanup of packer configuration files
+* ISOs of Ubuntu install media can now be put into the iso/ folder to avoid repeated downloads
 
 ## 19.1110.1
 
@@ -14,7 +16,7 @@
 ## 19.0729.1
 
 * Removed support for Ubuntu Trusty
-* Remove motd script that displays information about the bux on every login
+* Remove motd script that displays information about the box on every login
 * Cleanup of scripts
   * removal of unused scripts
   * minimize is now used during the build
