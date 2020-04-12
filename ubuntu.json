@@ -35,8 +35,8 @@
       "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
       "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_timeout": "10000s",
       "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "10000s",
       "tools_upload_flavor": "linux",
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
@@ -90,8 +90,8 @@
       "post_shutdown_delay": "1m",
       "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_timeout": "10000s",
       "ssh_username": "{{ user `ssh_username` }}",
-      "ssh_wait_timeout": "10000s",
       "type": "virtualbox-iso",
       "vboxmanage": [
         [
@@ -142,6 +142,7 @@
         "no_proxy={{user `no_proxy`}}"
       ],
       "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "expect_disconnect": "true",
       "scripts": [
         "script/desktop.sh",
         "script/update.sh",
@@ -153,8 +154,7 @@
         "script/minimize.sh",
         "script/cleanup.sh"
       ],
-      "type": "shell",
-      "expect_disconnect": "true"
+      "type": "shell"
     }
   ],
   "variables": {
@@ -166,6 +166,7 @@
     "disk_size": "65536",
     "ftp_proxy": "{{env `ftp_proxy`}}",
     "headless": "false",
+    "hostname": "vagrant",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
     "install_vagrant_key": "true",
@@ -179,7 +180,6 @@
     "no_proxy": "{{env `no_proxy`}}",
     "preseed": "preseed.cfg",
     "rsync_proxy": "{{env `rsync_proxy`}}",
-    "hostname": "vagrant",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
@@ -191,3 +191,4 @@
     "vmware_guest_os_type": "ubuntu-64"
   }
 }
+

@@ -1,10 +1,11 @@
+
 Vagrant.configure("2") do |config|
-    config.vm.define "ubuntu1604-desktop"
-    config.vm.box = "fasmat/ubuntu1604-desktop"
+    config.vm.define "ubuntu2004-desktop"
+    config.vm.box = "fasmat/ubuntu2004-desktop"
 
     config.vm.provider :virtualbox do |v|
         v.gui = true
-        v.customize ["modifyvm", :id, "--name", "Ubuntu 16.04"]
+        v.customize ["modifyvm", :id, "--name", "Ubuntu 20.04"]
         v.customize ["modifyvm", :id, "--memory", 4096]
         v.customize ["modifyvm", :id, "--cpus", 4]
         v.customize ["modifyvm", :id, "--vram", "256"]

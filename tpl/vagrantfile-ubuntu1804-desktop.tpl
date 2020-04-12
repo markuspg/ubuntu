@@ -3,7 +3,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "ubuntu1804-desktop"
     config.vm.box = "fasmat/ubuntu1804-desktop"
 
-    config.vm.provider :virtualbox do |v, override|
+    config.vm.provider :virtualbox do |v|
         v.gui = true
         v.customize ["modifyvm", :id, "--name", "Ubuntu 18.04"]
         v.customize ["modifyvm", :id, "--memory", 4096]
@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     end
 
-    config.vm.provider :vmware_desktop do |v, override|
+    config.vm.provider :vmware_desktop do |v|
         v.gui = true
         v.vmx["memsize"] = "4096"
         v.vmx["numvcpus"] = "4"
