@@ -148,8 +148,8 @@ The default is `custom-script.sh` which does nothing.
 1. Fork and clone the repository.
 2. Create a new branch, please don't work in your `master` branch directly.
 3. Add new [Serverspec](http://serverspec.org/) tests in the `test/` subtree for the change you want to make.
-4. Fix stuff if necessary.
-5. Run `make test` to test all templates or `bin/box test` on individual boxes to see if the tests pass. Repeat steps 3-5 until done.
+4. Run `make test` to test all templates or `bin/box test` on individual boxes to see if the tests pass.
+5. Fix stuff if necessary. Repeat steps 3-5 until done.
 6. Update `README.md` and `AUTHORS` to reflect any changes.
 7. If you have a large change in mind, it is still preferred that you split them into small commits.  Good commit messages are important.
    The git project has some nice guidelines on [writing descriptive commit messages](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).
