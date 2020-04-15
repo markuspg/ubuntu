@@ -181,6 +181,7 @@
     "version": "0.1.0",
     "virtualbox_guest_os_type": "Ubuntu_64",
     "vm_name": "ubuntu2004",
-    "vmware_guest_os_type": "ubuntu-64"
+    "vmware_guest_os_type": "ubuntu-64",
+    "vmx_remove_ethernet_interfaces": "true"
   }
 }
