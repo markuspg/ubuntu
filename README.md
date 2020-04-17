@@ -17,22 +17,22 @@ installed.
 We make use of JSON files containing user variables to build specific versions of Ubuntu.
 You tell `packer` to use a specific user variable file via the `-var-file=` command line
 option.  This will override the default options on the core `ubuntu.json` packer template,
-which builds Ubuntu 18.04 by default.
+which builds Ubuntu 20.04 by default.
 
 For example, to build Ubuntu 18.04, use the following:
 
 ```bash
-packer build -var-file=ubuntu1804.json ubuntu.json
+packer build -var-file=ubuntu1804-desktop.json ubuntu.json
 ```
 
 If you want to make boxes for a specific desktop virtualization platform, use the `-only`
 parameter.  For example, to build Ubuntu 18.04 for VirtualBox:
 
 ```bash
-packer build -only=virtualbox-iso -var-file=ubuntu1804.json ubuntu.json
+packer build -only=virtualbox-iso -var-file=ubuntu1804-desktop.json ubuntu.json
 ```
 
-The boxcutter templates currently support the following desktop virtualization strings:
+The templates currently support the following desktop virtualization strings:
 
 * `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
   desktop virtualization
@@ -42,16 +42,16 @@ The boxcutter templates currently support the following desktop virtualization s
 ## Building the Vagrant boxes with the box script
 
 We've also provided a wrapper script `bin/box` for ease of use, so alternatively, you can use
-the following to build Ubuntu 18.04 for all providers:
+the following to build Ubuntu 20.04 for all providers:
 
 ```bash
-bin/box build ubuntu1804
+bin/box build ubuntu2004-desktop
 ```
 
-Or if you just want to build Ubuntu 18.04 for VirtualBox:
+Or if you just want to build Ubuntu 20.04 for VirtualBox:
 
 ```bash
-bin/box build ubuntu1804 virtualbox
+bin/box build ubuntu2004-desktop virtualbox
 ```
 
 ## Building the Vagrant boxes with the Makefile
@@ -98,11 +98,11 @@ The `bin/box` script has sub-commands for running both the automated tests
 and for performing exploratory testing.
 
 Use the `bin/box test` sub-command to run the automated Serverspec tests.
-For example to execute the tests for the Ubuntu 18.04 box on VirtualBox, use
+For example to execute the tests for the Ubuntu 20.04 box on VirtualBox, use
 the following:
 
 ```bash
-bin/box test ubuntu1804-desktop virtualbox
+bin/box test ubuntu2004-desktop virtualbox
 ```
 
 ### Variable overrides
