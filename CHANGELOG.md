@@ -5,7 +5,6 @@
 * Fix packer scripts for packer 1.5.x
 * Update Ubuntu Bionic to 4th point release
 * Add support for Ubuntu Focal beta
-  * The final version of focal doesn't offer an image with debian installer yet and subiquity
 * German input source is now added again when building the box
 * Cleanup of packer configuration files
 * ISOs of Ubuntu install media can now be put into the iso/ folder to avoid repeated downloads

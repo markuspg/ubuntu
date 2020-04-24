@@ -5,35 +5,35 @@
       "boot_command": [
         "{{ user `boot_command_prefix` }}",
         "/install/vmlinuz noapic<wait> ",
-        "initrd=/install/initrd.gz ",
-        "file=/floppy/{{ user `preseed` }}<wait> ",
-        "debian-installer={{ user `locale` }} auto locale={{ user `locale` }} kbd-chooser/method=us ",
-        "hostname={{ user `hostname` }} ",
+        "initrd=/install/initrd.gz<wait> ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }}<wait> ",
+        "debian-installer={{ user `locale` }} auto locale={{ user `locale` }} kbd-chooser/method=us<wait> ",
+        "hostname={{ user `hostname` }}<wait> ",
         "grub-installer/bootdev=/dev/sda<wait> ",
-        "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "fb=false debconf/frontend=noninteractive<wait> ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA<wait> ",
         "keyboard-configuration/variant=USA console-setup/ask_detect=false<wait> ",
-        "passwd/user-fullname={{ user `ssh_fullname` }} ",
-        "passwd/user-password={{ user `ssh_password` }} ",
-        "passwd/user-password-again={{ user `ssh_password` }} ",
-        "passwd/username={{ user `ssh_username` }} ",
+        "passwd/user-fullname={{ user `ssh_fullname` }}<wait> ",
+        "passwd/user-password={{ user `ssh_password` }}<wait> ",
+        "passwd/user-password-again={{ user `ssh_password` }}<wait> ",
+        "passwd/username={{ user `ssh_username` }}<wait> ",
         "-- <enter>"
       ],
+      "boot_wait": "10s",
+      "cpus": "{{ user `cpus` }}",
       "disk_size": "{{ user `disk_size` }}",
-      "floppy_files": [
-        "http/{{ user `preseed` }}"
-      ],
-      "guest_os_type": "{{ user `vmware_guest_os_type` }}",
+      "guest_os_type": "ubuntu-64",
       "headless": "{{ user `headless` }}",
-      "http_directory": "http",
+      "http_directory": "./http",
       "iso_checksum": "{{ user `iso_checksum` }}",
       "iso_checksum_type": "{{ user `iso_checksum_type` }}",
       "iso_urls": [
         "{{ user `iso_path` }}/{{ user `iso_name` }}",
         "{{ user `iso_url` }}"
       ],
+      "memory": "{{ user `memory` }}",
       "output_directory": "output-{{ user `vm_name` }}-vmware-iso",
-      "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
+      "shutdown_command": "echo '{{ user `ssh_password` }}' | sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_timeout": "10000s",
       "ssh_username": "{{ user `ssh_username` }}",
@@ -41,9 +41,8 @@
       "type": "vmware-iso",
       "vm_name": "{{ user `vm_name` }}",
       "vmx_data": {
-        "ethernet0.pciSlotNumber": "32",
-        "memsize": "{{ user `memory` }}",
-        "numvcpus": "{{ user `cpus` }}"
+        "cpuid.coresPerSocket": "1",
+        "ethernet0.pciSlotNumber": "32"
       },
       "vmx_remove_ethernet_interfaces": true
     },
@@ -51,69 +50,49 @@
       "boot_command": [
         "{{ user `boot_command_prefix` }}",
         "/install/vmlinuz noapic<wait> ",
-        "initrd=/install/initrd.gz ",
-        "file=/floppy/{{ user `preseed` }}<wait> ",
-        "debian-installer={{ user `locale` }} auto locale={{ user `locale` }} kbd-chooser/method=us ",
-        "hostname={{ user `hostname` }} ",
+        "initrd=/install/initrd.gz<wait> ",
+        "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/{{ user `preseed` }}<wait> ",
+        "debian-installer={{ user `locale` }} auto locale={{ user `locale` }} kbd-chooser/method=us<wait> ",
+        "hostname={{ user `hostname` }}<wait> ",
         "grub-installer/bootdev=/dev/sda<wait> ",
-        "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "fb=false debconf/frontend=noninteractive<wait> ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA<wait> ",
         "keyboard-configuration/variant=USA console-setup/ask_detect=false<wait> ",
-        "passwd/user-fullname={{ user `ssh_fullname` }} ",
-        "passwd/user-password={{ user `ssh_password` }} ",
-        "passwd/user-password-again={{ user `ssh_password` }} ",
-        "passwd/username={{ user `ssh_username` }} ",
+        "passwd/user-fullname={{ user `ssh_fullname` }}<wait> ",
+        "passwd/user-password={{ user `ssh_password` }}<wait> ",
+        "passwd/user-password-again={{ user `ssh_password` }}<wait> ",
+        "passwd/username={{ user `ssh_username` }}<wait> ",
         "-- <enter>"
       ],
+      "boot_wait": "10s",
+      "cpus": "{{ user `cpus` }}",
       "disk_size": "{{ user `disk_size` }}",
-      "floppy_files": [
-        "http/{{ user `preseed` }}"
-      ],
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
-      "guest_os_type": "{{ user `virtualbox_guest_os_type` }}",
+      "guest_os_type": "Ubuntu_64",
       "hard_drive_interface": "sata",
       "headless": "{{ user `headless` }}",
+      "http_directory": "./http",
       "iso_checksum": "{{ user `iso_checksum` }}",
       "iso_checksum_type": "{{ user `iso_checksum_type` }}",
       "iso_urls": [
         "{{ user `iso_path` }}/{{ user `iso_name` }}",
         "{{ user `iso_url` }}"
       ],
+      "memory": "{{ user `memory` }}",
       "output_directory": "output-{{ user `vm_name` }}-virtualbox-iso",
-      "post_shutdown_delay": "1m",
       "shutdown_command": "echo '{{ user `ssh_password` }}'|sudo -S shutdown -P now",
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_timeout": "10000s",
       "ssh_username": "{{ user `ssh_username` }}",
       "type": "virtualbox-iso",
-      "vboxmanage": [
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--nictype1",
-          "virtio"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--memory",
-          "{{ user `memory` }}"
-        ],
-        [
-          "modifyvm",
-          "{{.Name}}",
-          "--cpus",
-          "{{ user `cpus` }}"
-        ]
-      ],
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "{{user `vm_name`}}"
+      "vm_name": "{{ user `vm_name` }}"
     }
   ],
   "post-processors": [
     {
       "keep_input_artifact": false,
-      "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
+      "output": "box/{{ .Provider }}/{{ user `vm_name` }}-{{ user `version` }}.box",
       "type": "vagrant",
       "vagrantfile_template": "{{ user `vagrantfile_template` }}"
     }
@@ -121,21 +100,19 @@
   "provisioners": [
     {
       "environment_vars": [
-        "CLEANUP_PAUSE={{user `cleanup_pause`}}",
-        "DEBIAN_FRONTEND=noninteractive",
-        "DESKTOP={{user `desktop`}}",
-        "UPDATE={{user `update`}}",
-        "INSTALL_VAGRANT_KEY={{user `install_vagrant_key`}}",
-        "SSH_USERNAME={{user `ssh_username`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "http_proxy={{user `http_proxy`}}",
-        "https_proxy={{user `https_proxy`}}",
-        "ftp_proxy={{user `ftp_proxy`}}",
-        "rsync_proxy={{user `rsync_proxy`}}",
-        "no_proxy={{user `no_proxy`}}"
+        "DESKTOP={{ user `desktop` }}",
+        "UPDATE={{ user `update` }}",
+        "INSTALL_VAGRANT_KEY={{ user `install_vagrant_key` }}",
+        "SSH_USERNAME={{ user `ssh_username` }}",
+        "SSH_PASSWORD={{ user `ssh_password` }}",
+        "http_proxy={{ user `http_proxy` }}",
+        "https_proxy={{ user `https_proxy` }}",
+        "ftp_proxy={{ user `ftp_proxy` }}",
+        "rsync_proxy={{ user `rsync_proxy` }}",
+        "no_proxy={{ user `no_proxy` }}"
       ],
-      "execute_command": "echo '{{ user `ssh_password` }}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
-      "expect_disconnect": "true",
+      "execute_command": "echo '{{ user `ssh_password` }}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
+      "expect_disconnect": true,
       "scripts": [
         "script/desktop.sh",
         "script/update.sh",
@@ -143,7 +120,7 @@
         "script/sshd.sh",
         "script/vmware.sh",
         "script/virtualbox.sh",
-        "{{user `custom_script`}}",
+        "{{ user `custom_script` }}",
         "script/minimize.sh",
         "script/cleanup.sh"
       ],
@@ -151,37 +128,32 @@
     }
   ],
   "variables": {
-    "boot_command_prefix": "<esc><wait><esc><wait><enter><wait>",
-    "cleanup_pause": "",
     "cpus": "1",
     "custom_script": "custom-script.sh",
     "desktop": "true",
     "disk_size": "130048",
-    "ftp_proxy": "{{env `ftp_proxy`}}",
+    "ftp_proxy": "{{ env `ftp_proxy` }}",
     "headless": "false",
     "hostname": "vagrant",
-    "http_proxy": "{{env `http_proxy`}}",
-    "https_proxy": "{{env `https_proxy`}}",
+    "http_proxy": "{{ env `http_proxy` }}",
+    "https_proxy": "{{ env `https_proxy` }}",
     "install_vagrant_key": "true",
-    "iso_checksum": "e2ecdace33c939527cbc9e8d23576381c493b071107207d2040af72595f8990b",
+    "iso_checksum": "36f15879bd9dfd061cd588620a164a82972663fdd148cce1f70d57d314c21b73",
     "iso_checksum_type": "sha256",
-    "iso_name": "ubuntu-18.04.4-server-amd64.iso",
+    "iso_name": "ubuntu-20.04-legacy-server-amd64.iso",
     "iso_path": "./iso",
-    "iso_url": "http://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.04.4-server-amd64.iso",
+    "iso_url": "http://cdimage.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/ubuntu-20.04-legacy-server-amd64.iso",
     "locale": "en_US.UTF-8",
     "memory": "1024",
-    "no_proxy": "{{env `no_proxy`}}",
+    "no_proxy": "{{ env `no_proxy` }}",
     "preseed": "preseed.cfg",
-    "rsync_proxy": "{{env `rsync_proxy`}}",
+    "rsync_proxy": "{{ env `rsync_proxy` }}",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_username": "vagrant",
     "update": "false",
-    "vagrantfile_template": "tpl/vagrantfile-ubuntu1804-desktop.tpl",
+    "vagrantfile_template": "tpl/vagrantfile-ubuntu2004-desktop.tpl",
     "version": "0.1.0",
-    "virtualbox_guest_os_type": "Ubuntu_64",
-    "vm_name": "ubuntu1804-desktop",
-    "vmware_guest_os_type": "ubuntu-64",
-    "vmx_remove_ethernet_interfaces": "true"
+    "vm_name": "ubuntu2004-desktop"
   }
 }

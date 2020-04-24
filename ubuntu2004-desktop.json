@@ -1,10 +1,10 @@
 {
   "_comment": "Build with `packer build -var-file=ubuntu2004-desktop.json ubuntu.json`",
   "vm_name": "ubuntu2004-desktop",
-  "iso_checksum": "412e8ed419d7ca7e1cfc533ee4e2220e01da706c72033d3b4e35a177fd10595f",
+  "iso_checksum": "36f15879bd9dfd061cd588620a164a82972663fdd148cce1f70d57d314c21b73",
   "iso_checksum_type": "sha256",
-  "iso_name": "ubuntu-20.04-beta-server-amd64.iso",
-  "iso_url": "http://cdimage.ubuntu.com/releases/20.04/beta/ubuntu-20.04-beta-server-amd64.iso",
+  "iso_name": "ubuntu-20.04-legacy-server-amd64.iso",
+  "iso_url": "http://cdimage.ubuntu.com/ubuntu-legacy-server/releases/20.04/release/ubuntu-20.04-legacy-server-amd64.iso",
   "vagrantfile_template": "tpl/vagrantfile-ubuntu2004-desktop.tpl",
   "boot_command_prefix": "<esc><wait><esc><wait><enter><wait>"
 }
