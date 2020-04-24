@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eux
 
 if [[ ! "$DESKTOP" =~ ^(true|yes|on|1|TRUE|YES|ON])$ ]]; then
     exit
@@ -56,4 +56,16 @@ if [ -d /etc/xdg/autostart/ ]; then
     echo "Hidden=false" >>$IDLE_DELAY_CONFIG
     echo "NoDisplay=false" >>$IDLE_DELAY_CONFIG
     echo "X-GNOME-Autostart-enabled=true" >>$IDLE_DELAY_CONFIG
+
+    echo "==> Add German input source and make it default"
+    INPUT_SOURCE_CONFIG=/etc/xdg/autostart/input-source.desktop
+    echo "[Desktop Entry]" >>$INPUT_SOURCE_CONFIG
+    echo "Type=Application" >>$INPUT_SOURCE_CONFIG
+    echo "Name=input-source" >>$INPUT_SOURCE_CONFIG
+    echo "Comment=" >>$INPUT_SOURCE_CONFIG
+    echo "Exec=gsettings set org.gnome.desktop.input-sources sources \"[('xkb', 'de'), ('xkb', 'us')]\"" >>$INPUT_SOURCE_CONFIG
+    echo "Hidden=false" >>$INPUT_SOURCE_CONFIG
+    echo "NoDisplay=false" >>$INPUT_SOURCE_CONFIG
+    echo "AutostartCondition=unless-exists gnome-initial-setup-done" >>$INPUT_SOURCE_CONFIG
+    echo "X-GNOME-Autostart-enabled=true" >>$INPUT_SOURCE_CONFIG
 fi

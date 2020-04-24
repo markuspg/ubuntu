@@ -1,21 +1,40 @@
 # Changelog
 
-## upcoming release
+## 20.0424.1
 
-* Update Ubuntu xenial box to 6th point release
-  * Fix auto-login
+* Fix packer scripts for packer 1.5.x
+* Update Ubuntu Bionic to 4th point release
+* Add support for Ubuntu Focal beta
+  * The final version of focal doesn't offer an image with debian installer yet and subiquity
+* German input source is now added again when building the box
+* Cleanup of packer configuration files
+* ISOs of Ubuntu install media can now be put into the iso/ folder to avoid repeated downloads
+
+## 19.1110.1
+
+* Update Ubuntu Bionic to 3rd point release
+
+## 19.0729.1
+
+* Removed support for Ubuntu Trusty
+* Remove motd script that displays information about the box on every login
 * Cleanup of scripts
-  * removal of trusty specific code
   * removal of unused scripts
-  * minimize is now used, during the build
+  * minimize is now used during the build
 * The screensaver is now disabled by default
 * LibreOffice and some Gnome Tools have been removed to decrease the size of the boxes
+* Fix auto-login
 
-## 19.0218.01
+## 19.0306.1
+
+* Update Ubuntu Xenial to 6th point release
+* Fix formatting of README.md
+
+## 19.0218.1
 
 * Update Ubuntu bionic box to 2nd point release
 
-## 18.1125.01
+## 18.1125.1
 
 * Fix auto-login not working in Ubuntu 18.04
 * Fix broken network configuration in vmware

@@ -22,17 +22,17 @@ which builds Ubuntu 18.04 by default.
 For example, to build Ubuntu 18.04, use the following:
 
 ```bash
-packer build -var-file=ubuntu1804.json ubuntu.json
+packer build -var-file=ubuntu1804-desktop.json ubuntu.json
 ```
 
 If you want to make boxes for a specific desktop virtualization platform, use the `-only`
 parameter.  For example, to build Ubuntu 18.04 for VirtualBox:
 
 ```bash
-packer build -only=virtualbox-iso -var-file=ubuntu1804.json ubuntu.json
+packer build -only=virtualbox-iso -var-file=ubuntu1804-desktop.json ubuntu.json
 ```
 
-The boxcutter templates currently support the following desktop virtualization strings:
+The templates currently support the following desktop virtualization strings:
 
 * `virtualbox-iso` - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
   desktop virtualization
@@ -45,13 +45,13 @@ We've also provided a wrapper script `bin/box` for ease of use, so alternatively
 the following to build Ubuntu 18.04 for all providers:
 
 ```bash
-bin/box build ubuntu1804
+bin/box build ubuntu1804-desktop
 ```
 
 Or if you just want to build Ubuntu 18.04 for VirtualBox:
 
 ```bash
-bin/box build ubuntu1804 virtualbox
+bin/box build ubuntu1804-desktop virtualbox
 ```
 
 ## Building the Vagrant boxes with the Makefile
@@ -148,8 +148,8 @@ The default is `custom-script.sh` which does nothing.
 1. Fork and clone the repository.
 2. Create a new branch, please don't work in your `master` branch directly.
 3. Add new [Serverspec](http://serverspec.org/) tests in the `test/` subtree for the change you want to make.
-4. Fix stuff if necessary.
-5. Run `make test` to test all templates or `bin/box test` on individual boxes to see if the tests pass. Repeat steps 3-5 until done.
+4. Run `make test` to test all templates or `bin/box test` on individual boxes to see if the tests pass.
+5. Fix stuff if necessary. Repeat steps 3-5 until done.
 6. Update `README.md` and `AUTHORS` to reflect any changes.
 7. If you have a large change in mind, it is still preferred that you split them into small commits.  Good commit messages are important.
    The git project has some nice guidelines on [writing descriptive commit messages](http://git-scm.com/book/ch5-2.html#Commit-Guidelines).

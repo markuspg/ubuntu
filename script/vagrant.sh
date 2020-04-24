@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eux
 
 echo "==> Recording box generation date"
 date > /etc/vagrant_box_build_date
