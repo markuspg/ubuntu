@@ -26,14 +26,8 @@ args() {
 
   box_path=$1
   box_provider=$2
-  vagrant_provider=${3:-${box_provider}}
   if [ "$box_provider" = "vmware" ]; then
     box_provider=vmware_desktop
-    if [[ $OSTYPE =~ darwin ]]; then
-      vagrant_provider=vmware_fusion
-    else
-      vagrant_provider=vmware_workstation
-    fi
   fi
   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   test_src_path=${SCRIPT_DIR}/../test/*_spec.rb
@@ -69,7 +63,7 @@ mkdir -p ${tmp_path}
 ret=0
 pushd ${tmp_path}
 create_vagrantfile_linux
-VAGRANT_LOG=warn vagrant up --provider ${vagrant_provider} || ret=1
+VAGRANT_LOG=warn vagrant up --provider ${box_provider} || ret=1
 vagrant destroy -f
 popd
 
