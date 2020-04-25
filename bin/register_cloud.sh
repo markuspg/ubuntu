@@ -55,8 +55,11 @@ get_short_description() {
     RAW_VERSION=${RAW_VERSION%-desktop}
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
+    20.04)
+        PRETTY_VERSION="20.04 Focal Fossa"
+        ;;
     18.04)
-        PRETTY_VERSION="18.04.3 Bionic Beaver"
+        PRETTY_VERSION="18.04.4 Bionic Beaver"
         ;;
     16.04)
         PRETTY_VERSION="16.04.6 Xenial Xerus"
@@ -90,8 +93,11 @@ create_description() {
     RAW_VERSION=${RAW_VERSION%-desktop}
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
+    20.04)
+        PRETTY_VERSION="20.04 Focal Fossa"
+        ;;
     18.04)
-        PRETTY_VERSION="18.04.3 Bionic Beaver"
+        PRETTY_VERSION="18.04.4 Bionic Beaver"
         ;;
     16.04)
         PRETTY_VERSION="16.04.6 Xenial Xerus"
