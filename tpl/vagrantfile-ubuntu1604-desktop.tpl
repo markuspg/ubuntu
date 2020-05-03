@@ -9,7 +9,6 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id, "--cpus", 4]
     v.customize ["modifyvm", :id, "--vram", "256"]
     v.customize ["modifyvm", :id, "--accelerate3d", "on"]
-    v.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
     v.customize ["modifyvm", :id, "--ioapic", "on"]
     v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
   end
