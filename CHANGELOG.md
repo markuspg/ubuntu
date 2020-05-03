@@ -1,6 +1,12 @@
 # Changelog
 
-## 20.0424.1
+## Next version (unreleased)
+
+* Ensure that Virtualbox boxes (18.04 and up) use VMSVGA as graphics adapter by setting it in the default Vagrantfile
+* Add tests for various changes introduced recently
+* Add rubocop and solargraph configuration
+
+## 20.0425.1
 
 * Fix packer scripts for packer 1.5.x
 * Update Ubuntu Bionic to 4th point release

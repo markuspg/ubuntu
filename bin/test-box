@@ -26,24 +26,30 @@ args() {
 
   box_path=$1
   box_provider=$2
-  if [ "$box_provider" = "vmware" ]; then
-    box_provider=vmware_desktop
-  fi
   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  test_src_path=${SCRIPT_DIR}/../test/*_spec.rb
+  test_provider_src_path="${SCRIPT_DIR}/../test/${box_provider}/*_spec.rb"
+  test_src_path="${SCRIPT_DIR}/../test/*_spec.rb"
+
+  if [ "$box_provider" = "vmware" ]; then
+    box_provider="vmware_desktop"
+  fi
 }
 
 create_vagrantfile_linux() {
   vagrant plugin list | grep vagrant-serverspec && echo "vagrant-serverspec installed" || vagrant plugin install vagrant-serverspec
-  cat <<EOF >${tmp_path}/Vagrantfile
+  cat <<VFILE >${tmp_path}/Vagrantfile
 Vagrant.configure('2') do |config|
-config.vm.box = '$box_name'
+  config.vm.box = '$box_name'
 
-config.vm.provision :serverspec do |spec|
-spec.pattern = '${test_src_path}'
+  config.vm.provision :serverspec do |spec|
+    spec.pattern = '${test_provider_src_path}'
+  end
+  
+  config.vm.provision :serverspec do |spec|
+    spec.pattern = '${test_src_path}'
+  end
 end
-end
-EOF
+VFILE
 }
 
 # main
