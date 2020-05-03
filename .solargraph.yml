@@ -1,0 +1,12 @@
+---
+include:
+- "**/*.rb"
+exclude:
+- 'scripts/local-mode-cache/**/*'
+require: []
+domains: []
+reporters:
+- rubocop
+- require_not_found
+require_paths: []
+max_files: 5000

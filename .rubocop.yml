@@ -1,0 +1,48 @@
+Layout/LineLength:
+  Max: 180
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Metrics/AbcSize:
+  Max: 40
+Metrics/BlockLength:
+  Max: 125
+Metrics/MethodLength:
+  Max: 55
+Metrics/ParameterLists:
+  Max: 7
+Style/AsciiComments:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/GlobalVars:
+  Enabled: false
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/NumericLiterals:
+  Enabled: false
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/RedundantReturn:
+  Enabled: false
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.5
+  Exclude:
+    - "out/**/*"
+    - "**/berks-cookbooks/**/*"
+    - "**/build/lib/gaudi.rb"
+    - "**/build/lib/gaudi/**/*.rb"
+    - "**/build/lib/zuehlke/**/*.rb"
+    - "**/local-mode-cache/**/*"
