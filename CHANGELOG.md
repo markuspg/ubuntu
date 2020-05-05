@@ -2,7 +2,9 @@
 
 ## Next version (unreleased)
 
-* Ensure that Virtualbox boxes (18.04 and up) use VMSVGA as graphics adapter by setting it in the default Vagrantfile
+* Ensure that Virtualbox boxes (18.04 and up) use VMSVGA as default graphics adapter
+* Remove hard coded name for Virtualbox
+* Make Virtualbox boxes linked clones by default
 * Add tests for various changes introduced recently
 * Add rubocop and solargraph configuration
 
