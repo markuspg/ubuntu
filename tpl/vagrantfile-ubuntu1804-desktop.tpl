@@ -4,9 +4,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :virtualbox do |v|
     v.gui = true
-    v.customize ["modifyvm", :id, "--name", "Ubuntu 18.04"]
-    v.customize ["modifyvm", :id, "--memory", 4096]
-    v.customize ["modifyvm", :id, "--cpus", 4]
+    v.linked_clone = true
+    v.memory = 4096
+    v.cpus = 4
+
     v.customize ["modifyvm", :id, "--vram", "256"]
     v.customize ["modifyvm", :id, "--accelerate3d", "on"]
     v.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
@@ -16,6 +17,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.provider :vmware_desktop do |v|
     v.gui = true
+    v.linked_clone = true
     v.vmx["memsize"] = "4096"
     v.vmx["numvcpus"] = "4"
 
