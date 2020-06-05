@@ -1,12 +1,13 @@
 # Changelog
 
-## Next version (unreleased)
+## 20.0605
 
 * Ensure that Virtualbox boxes (18.04 and up) use VMSVGA as default graphics adapter
 * Remove hard coded name for Virtualbox
 * Make Virtualbox boxes linked clones by default
 * Add tests for various changes introduced recently
 * Add rubocop and solargraph configuration
+* Use live server image for Ubuntu 20.04
 
 ## 20.0425.1
 
