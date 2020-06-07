@@ -6,7 +6,7 @@ if [ "${DEBUG:=false}" = "true" ]; then
 fi
 
 usage() {
-  echo "usage: $(basename $0) VAR_LIST_FILE [vmware|virtualbox] [PACKER_TEMPLATE]"
+  echo "usage: $(basename $0) PACKER_TEMPLATE [vmware|virtualbox]"
   echo
   echo "Build a box"
 }
@@ -17,11 +17,11 @@ args() {
     exit 0
   fi
 
-  var_file=$1
-  if [ ! -f ${var_file} ]; then
-    var_file="${var_file}.json"
-    if [ ! -f ${var_file} ]; then
-      echo "$(basename $0): Invalid template file ${var_file}"
+  packer_template=$1
+  if [ ! -f ${packer_template} ]; then
+    packer_template="${packer_template}.json"
+    if [ ! -f ${packer_template} ]; then
+      echo "$(basename $0): Invalid template file ${packer_template}"
       exit 127
     fi
   fi
@@ -42,11 +42,10 @@ args() {
   if [ -n "${only}" ]; then
     only="-only=${only}"
   fi
-  packer_template=${3:-ubuntu.json}
 }
 
 # main
 args "$@"
 
 version=$(cat VERSION)
-packer build ${only} -var-file=${var_file} -var "version=${version}" ${packer_template}
+packer build ${only} -var "version=${version}" ${packer_template}

@@ -16,7 +16,7 @@ USERNAME=${SSH_USER}
 LIGHTDM_CONFIG=/etc/lightdm/lightdm.conf
 GDM_CUSTOM_CONFIG=/etc/gdm3/custom.conf
 
-# Ubuntu 18.04 uses GDM
+# Ubuntu 18.04 and 20.04 use GDM
 if [ -f $GDM_CUSTOM_CONFIG ]; then
     mkdir -p $(dirname ${GDM_CUSTOM_CONFIG})
     >$GDM_CUSTOM_CONFIG

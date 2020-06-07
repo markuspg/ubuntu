@@ -14,22 +14,18 @@ To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wi
 [VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation)
 installed.
 
-We make use of JSON files containing user variables to build specific versions of Ubuntu.
-You tell `packer` to use a specific user variable file via the `-var-file=` command line
-option.  This will override the default options on the core `ubuntu.json` packer template,
-which builds Ubuntu 20.04 by default.
-
+We make use of JSON files containing packer templates to build specific versions of Ubuntu.
 For example, to build Ubuntu 20.04, use the following:
 
 ```bash
-packer build -var-file=ubuntu2004-desktop.json ubuntu.json
+packer build ubuntu2004-desktop.json
 ```
 
 If you want to make boxes for a specific desktop virtualization platform, use the `-only`
 parameter.  For example, to build Ubuntu 20.04 for VirtualBox:
 
 ```bash
-packer build -only=virtualbox-iso -var-file=ubuntu2004-desktop.json ubuntu.json
+packer build -only=virtualbox-iso ubuntu2004-desktop.json
 ```
 
 The templates currently support the following desktop virtualization strings:
