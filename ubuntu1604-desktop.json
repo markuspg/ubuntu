@@ -25,8 +25,7 @@
       "guest_os_type": "ubuntu-64",
       "headless": "{{ user `headless` }}",
       "http_directory": "./http",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_checksum": "{{ user `iso_checksum_type` }}:{{ user `iso_checksum` }}",
       "iso_urls": [
         "{{ user `iso_path` }}/{{ user `iso_name` }}",
         "{{ user `iso_url` }}"
@@ -70,8 +69,7 @@
       "hard_drive_interface": "sata",
       "headless": "{{ user `headless` }}",
       "http_directory": "./http",
-      "iso_checksum": "{{ user `iso_checksum` }}",
-      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "iso_checksum": "{{ user `iso_checksum_type` }}:{{ user `iso_checksum` }}",
       "iso_urls": [
         "{{ user `iso_path` }}/{{ user `iso_name` }}",
         "{{ user `iso_url` }}"
@@ -139,7 +137,7 @@
     "iso_checksum_type": "sha256",
     "iso_name": "ubuntu-16.04.6-server-amd64.iso",
     "iso_path": "./iso",
-    "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04.6-server-amd64.iso",
+    "iso_url": "https://releases.ubuntu.com/16.04/ubuntu-16.04.6-server-amd64.iso",
     "locale": "en_US.UTF-8",
     "memory": "1024",
     "no_proxy": "{{ env `no_proxy` }}",

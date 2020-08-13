@@ -1,6 +1,11 @@
 # Changelog
 
-## 20.0605
+## 20.0813.1
+
+* Update Focal to 20.04.1
+* Update packer files for packer v1.6.x
+
+## 20.0605.1
 
 * Ensure that Virtualbox boxes (18.04 and up) use VMSVGA as default graphics adapter
 * Remove hard coded name for Virtualbox
