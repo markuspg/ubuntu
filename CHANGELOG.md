@@ -1,5 +1,10 @@
 # Changelog
 
+## 20.1027.1
+
+* Update Bionic to 18.04.5
+* Update Xenial to 16.04.7
+
 ## 20.0813.1
 
 * Update Focal to 20.04.1
