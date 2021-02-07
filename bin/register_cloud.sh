@@ -56,13 +56,13 @@ get_short_description() {
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
     20.04)
-        PRETTY_VERSION="20.04.1 Focal Fossa"
+        PRETTY_VERSION="20.04.2 Focal Fossa"
         ;;
     18.04)
-        PRETTY_VERSION="18.04.4 Bionic Beaver"
+        PRETTY_VERSION="18.04.5 Bionic Beaver"
         ;;
     16.04)
-        PRETTY_VERSION="16.04.6 Xenial Xerus"
+        PRETTY_VERSION="16.04.7 Xenial Xerus"
         ;;
     esac
 
@@ -94,13 +94,13 @@ create_description() {
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
     20.04)
-        PRETTY_VERSION="20.04.1 Focal Fossa"
+        PRETTY_VERSION="20.04.2 Focal Fossa"
         ;;
     18.04)
-        PRETTY_VERSION="18.04.4 Bionic Beaver"
+        PRETTY_VERSION="18.04.5 Bionic Beaver"
         ;;
     16.04)
-        PRETTY_VERSION="16.04.6 Xenial Xerus"
+        PRETTY_VERSION="16.04.7 Xenial Xerus"
         ;;
     esac
 
