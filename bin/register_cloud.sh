@@ -56,7 +56,7 @@ get_short_description() {
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
     20.04)
-        PRETTY_VERSION="20.04.2 Focal Fossa"
+        PRETTY_VERSION="20.04.3 Focal Fossa"
         ;;
     18.04)
         PRETTY_VERSION="18.04.5 Bionic Beaver"
@@ -94,7 +94,7 @@ create_description() {
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
     20.04)
-        PRETTY_VERSION="20.04.2 Focal Fossa"
+        PRETTY_VERSION="20.04.3 Focal Fossa"
         ;;
     18.04)
         PRETTY_VERSION="18.04.5 Bionic Beaver"
