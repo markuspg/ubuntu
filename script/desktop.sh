@@ -26,14 +26,6 @@ if [ -f $GDM_CUSTOM_CONFIG ]; then
     echo "AutomaticLogin = ${USERNAME}" >>$GDM_CUSTOM_CONFIG
 fi
 
-# Ubuntu 16.04 uses LightDM
-if [ -d $(dirname $LIGHTDM_CONFIG) ]; then
-    echo "==> Configuring lightdm autologin"
-    echo "[SeatDefaults]" >>$LIGHTDM_CONFIG
-    echo "autologin-user=${USERNAME}" >>$LIGHTDM_CONFIG
-    echo "autologin-user-timeout=0" >>$LIGHTDM_CONFIG
-fi
-
 if [ -d /etc/xdg/autostart/ ]; then
     echo "==> Disabling screen blanking"
     NODPMS_CONFIG=/etc/xdg/autostart/nodpms.desktop
