@@ -61,9 +61,6 @@ get_short_description() {
     18.04)
         PRETTY_VERSION="18.04.5 Bionic Beaver"
         ;;
-    16.04)
-        PRETTY_VERSION="16.04.7 Xenial Xerus"
-        ;;
     esac
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
@@ -98,9 +95,6 @@ create_description() {
         ;;
     18.04)
         PRETTY_VERSION="18.04.5 Bionic Beaver"
-        ;;
-    16.04)
-        PRETTY_VERSION="16.04.7 Xenial Xerus"
         ;;
     esac
 
