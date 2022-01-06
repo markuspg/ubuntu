@@ -181,7 +181,7 @@ publish_provider() {
         --header "Authorization: Bearer ${atlas_access_token}" \
         "${ATLAS_API_URL}/box/${atlas_username}/${BOX_NAME}/version/${VERSION}/provider/${PROVIDER}/upload")
     UPLOAD_PATH=$(echo "$RESULT" | jq -r .upload_path)
-    curl "$UPLOAD_PATH" --request PUT --upload-file $FILE
+    curl "$UPLOAD_PATH" --progress-bar --request PUT --upload-file $FILE
 }
 
 atlas_publish() {
