@@ -1,8 +1,12 @@
 # Changelog
 
+## 22.0306.1
+
+* Update Focal to 20.04.4
+
 ## 21.1024.1
 
-* Update Bionic to 18.06.6
+* Update Bionic to 18.04.6
 * Removal of Xenial
 
 ## 21.0828.1

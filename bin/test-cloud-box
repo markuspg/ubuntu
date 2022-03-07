@@ -6,7 +6,7 @@ if [ "${DEBUG:=false}" = "true" ]; then
 fi
 
 usage() {
-  echo "usage: $(basename $0) BOX_NAME [vmware|virtualbox]"
+  echo "usage: $(basename $0) BOX_NAME [vmware|virtualbox] BOX_VERSION"
   echo
   echo "Download BOX_NAME from Atlas and run automated tests against it"
 }
@@ -26,6 +26,7 @@ args() {
 
   box_path=$1
   box_provider=$2
+  box_version=$3
   if [ "$box_provider" = "vmware" ]; then
     box_provider=vmware_desktop
   fi
@@ -57,8 +58,8 @@ tmp_path=/tmp/vagrantcloudtest
 rm -rf ${tmp_path}
 rm -f ~/.ssh/known_hosts
 
-vagrant box remove ${box_path} --provider ${box_provider} 2>/dev/null || true
-vagrant box add ${box_path} --provider=${box_provider}
+vagrant box remove ${box_path} --provider ${box_provider} --box-version ${box_version} 2>/dev/null || true
+vagrant box add ${box_path} --provider=${box_provider} --box-version ${box_version}
 mkdir -p ${tmp_path}
 
 pushd ${tmp_path}
@@ -68,4 +69,4 @@ sleep 10
 vagrant destroy -f
 popd
 
-vagrant box remove ${box_path} --provider=${box_provider}
+vagrant box remove ${box_path} --provider=${box_provider} --box-version ${box_version}

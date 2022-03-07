@@ -45,13 +45,13 @@ test_cloud: test_cloud_vmware test_cloud_virtualbox
 test_cloud_vmware:
 	@for box_name in $(BOX_NAMES) ; do \
 		echo Checking $$box_name ; \
-		bin/test-cloud-box fasmat/$$box_name vmware ; \
+		bin/test-cloud-box fasmat/$$box_name vmware $(BOX_VERSION) ; \
 	done
 
 test_cloud_virtualbox:
 	@for box_name in $(BOX_NAMES) ; do \
 		echo Checking $$box_name ; \
-		bin/test-cloud-box fasmat/$$box_name virtualbox ; \
+		bin/test-cloud-box fasmat/$$box_name virtualbox $(BOX_VERSION) ; \
 	done
 
 deliver:
