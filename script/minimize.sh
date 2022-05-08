@@ -15,8 +15,8 @@ echo "==> Removing obsolete networking components"
 apt-get -y purge ppp pppconfig pppoeconf
 echo "==> Removing LibreOffice"
 apt-get -y purge libreoffice-core libreoffice-calc libreoffice-common libreoffice-draw libreoffice-gtk libreoffice-gnome libreoffice-impress libreoffice-math libreoffice-gtk libreoffice-ogltrans libreoffice-pdfimport libreoffice-writer libreoffice-style-tango
-echo "==> Remove firefox"
-apt-get -y purge firefox
+echo "==> Remove Firefox and Thunderbird"
+apt-get -y purge firefox thunderbird
 echo "==> Remove snapd"
 apt-get -y purge snapd
 echo "==> Remove gnome games and utilities"
