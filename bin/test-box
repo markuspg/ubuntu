@@ -26,6 +26,15 @@ args() {
 
   box_path=$1
   box_provider=$2
+  if [ ! -f ${box_path} ]; then
+    version=$(cat VERSION)
+    box_path="box/${box_provider}/${box_path}-${version}.box"
+    if [ ! -f ${box_path} ]; then
+      echo "$(basename $0): Invalid box file ${box_path}"
+      exit 127
+    fi
+  fi
+
   SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   test_provider_src_path="${SCRIPT_DIR}/../test/${box_provider}/*_spec.rb"
   test_src_path="${SCRIPT_DIR}/../test/*_spec.rb"

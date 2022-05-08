@@ -25,6 +25,7 @@ args() {
       exit 127
     fi
   fi
+
   only=${2:-}
   if [[ -n ${only} ]]; then
     if [[ ! $only =~ ^(vmware|virtualbox)$ ]]; then
@@ -34,11 +35,13 @@ args() {
       exit 1
     fi
   fi
+
   if [[ "${only}" = "vmware" ]]; then
     only=vmware-iso
   elif [[ "${only}" = "virtualbox" ]]; then
     only=virtualbox-iso
   fi
+
   if [ -n "${only}" ]; then
     only="-only=${only}"
   fi
