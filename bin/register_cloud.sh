@@ -55,6 +55,9 @@ get_short_description() {
     RAW_VERSION=${RAW_VERSION%-desktop}
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
+    22.04)
+        PRETTY_VERSION="22.04 Jammy Jellyfish"
+        ;;
     20.04)
         PRETTY_VERSION="20.04.4 Focal Fossa"
         ;;
@@ -90,6 +93,9 @@ create_description() {
     RAW_VERSION=${RAW_VERSION%-desktop}
     PRETTY_VERSION=${RAW_VERSION:0:2}.${RAW_VERSION:2}
     case ${PRETTY_VERSION} in
+    22.04)
+        PRETTY_VERSION="22.04 Jammy Jellyfish"
+        ;;
     20.04)
         PRETTY_VERSION="20.04.4 Focal Fossa"
         ;;

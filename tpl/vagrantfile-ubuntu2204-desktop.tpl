@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
-  config.vm.define "ubuntu1604-desktop"
-  config.vm.box = "fasmat/ubuntu1604-desktop"
+  config.vm.define "ubuntu2204-desktop"
+  config.vm.box = "fasmat/ubuntu2204-desktop"
 
   config.vm.provider :virtualbox do |v|
     v.gui = true

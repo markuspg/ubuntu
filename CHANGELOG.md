@@ -1,5 +1,9 @@
 # Changelog
 
+## unreleased
+
+* Add Ubuntu 22.04 Jammy Jellyfish
+
 ## 22.0306.1
 
 * Update Focal to 20.04.4

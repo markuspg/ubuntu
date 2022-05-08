@@ -15,17 +15,17 @@ To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wi
 installed.
 
 We make use of JSON files containing packer templates to build specific versions of Ubuntu.
-For example, to build Ubuntu 20.04, use the following:
+For example, to build Ubuntu 22.04, use the following:
 
 ```bash
-packer build ubuntu2004-desktop.json
+packer build ubuntu2204-desktop.json
 ```
 
 If you want to make boxes for a specific desktop virtualization platform, use the `-only`
-parameter.  For example, to build Ubuntu 20.04 for VirtualBox:
+parameter.  For example, to build Ubuntu 22.04 for VirtualBox:
 
 ```bash
-packer build -only=virtualbox-iso ubuntu2004-desktop.json
+packer build -only=virtualbox-iso ubuntu2204-desktop.json
 ```
 
 The templates currently support the following desktop virtualization strings:
@@ -38,16 +38,16 @@ The templates currently support the following desktop virtualization strings:
 ## Building the Vagrant boxes with the box script
 
 We've also provided a wrapper script `bin/box` for ease of use, so alternatively, you can use
-the following to build Ubuntu 20.04 for all providers:
+the following to build Ubuntu 22.04 for all providers:
 
 ```bash
-bin/box build ubuntu2004-desktop
+bin/box build ubuntu2204-desktop
 ```
 
-Or if you just want to build Ubuntu 20.04 for VirtualBox:
+Or if you just want to build Ubuntu 22.04 for VirtualBox:
 
 ```bash
-bin/box build ubuntu2004-desktop virtualbox
+bin/box build ubuntu2204-desktop virtualbox
 ```
 
 ## Building the Vagrant boxes with the Makefile
@@ -94,11 +94,11 @@ The `bin/box` script has sub-commands for running both the automated tests
 and for performing exploratory testing.
 
 Use the `bin/box test` sub-command to run the automated Serverspec tests.
-For example to execute the tests for the Ubuntu 20.04 box on VirtualBox, use
+For example to execute the tests for the Ubuntu 22.04 box on VirtualBox, use
 the following:
 
 ```bash
-bin/box test ubuntu2004-desktop virtualbox
+bin/box test ubuntu2204-desktop virtualbox
 ```
 
 ### Variable overrides
