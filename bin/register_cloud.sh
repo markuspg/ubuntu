@@ -68,6 +68,7 @@ get_short_description() {
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
     VMWARE_VERSION=$(vmrun | sed -n '2p' | awk '{print $(NF-1)}')
+    PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
     SHORT_DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}"
 }
 
@@ -106,9 +107,11 @@ create_description() {
 
     VIRTUALBOX_VERSION=$(VirtualBox --help | head -n 1 | awk '{print $NF}')
     VMWARE_VERSION=$(vmrun | sed -n '2p' | awk '{print $(NF-1)}')
+    PARALLELS_VERSION=$(prlctl --version | awk '{print $3}')
 
     VMWARE_BOX_FILE=box/vmware/${BOX_NAME}${BOX_SUFFIX}
     VIRTUALBOX_BOX_FILE=box/virtualbox/${BOX_NAME}${BOX_SUFFIX}
+    PARALLELS_BOX_FILE=box/parallels/${BOX_NAME}${BOX_SUFFIX}
     DESCRIPTION="Ubuntu${EDITION_STRING} ${PRETTY_VERSION} (${BIT_STRING})${DOCKER_STRING}
 
 "
@@ -119,6 +122,10 @@ create_description() {
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         FILESIZE=$(du -k -h "${VIRTUALBOX_BOX_FILE}" | cut -f1)
         DESCRIPTION=${DESCRIPTION}"VirtualBox ${FILESIZE}B/"
+    fi
+    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
+        FILESIZE=$(du -k -h "${PARALLELS_BOX_FILE}" | cut -f1)
+        DESCRIPTION=${DESCRIPTION}"Parallels ${FILESIZE}B/"
     fi
     DESCRIPTION=${DESCRIPTION%?}
 
@@ -131,6 +138,11 @@ VMware Tools ${VMWARE_VERSION}"
         DESCRIPTION="${DESCRIPTION}
 
 VirtualBox Guest Additions ${VIRTUALBOX_VERSION}"
+    fi
+    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
+        DESCRIPTION="${DESCRIPTION}
+
+Parallels Tools ${PARALLELS_VERSION}"
     fi
 
     VERSION_JSON=$(
@@ -155,6 +167,7 @@ publish_provider() {
 
     VMWARE_BOX_FILE=box/vmware/${BOX_NAME}${BOX_SUFFIX}
     VIRTUALBOX_BOX_FILE=box/virtualbox/${BOX_NAME}${BOX_SUFFIX}
+    PARALLELS_BOX_FILE=box/parallels/${BOX_NAME}${BOX_SUFFIX}
 
     if [ 200 -eq ${HTTP_STATUS} ]; then
         echo "==> Updating ${PROVIDER} provider"
@@ -181,6 +194,8 @@ publish_provider() {
         FILE=${VMWARE_BOX_FILE}
     elif [[ "virtualbox" == "${PROVIDER}" ]]; then
         FILE=${VIRTUALBOX_BOX_FILE}
+    elif [[ "parallels" == "${PROVIDER}" ]]; then
+        FILE=${PARALLELS_BOX_FILE}
     fi
 
     RESULT=$(curl \
@@ -259,6 +274,10 @@ atlas_publish() {
     fi
     if [[ -e ${VIRTUALBOX_BOX_FILE} ]]; then
         PROVIDER=virtualbox
+        publish_provider ${atlas_username} ${atlas_access_token}
+    fi
+    if [[ -e ${PARALLELS_BOX_FILE} ]]; then
+        PROVIDER=parallels
         publish_provider ${atlas_username} ${atlas_access_token}
     fi
 

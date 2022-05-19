@@ -6,7 +6,7 @@ if [ "${DEBUG:=false}" = "true" ]; then
 fi
 
 usage() {
-  echo "usage: $(basename $0) PACKER_TEMPLATE [vmware|virtualbox]"
+  echo "usage: $(basename $0) PACKER_TEMPLATE [vmware|virtualbox|parallels]"
   echo
   echo "Build a box"
 }
@@ -28,9 +28,9 @@ args() {
 
   only=${2:-}
   if [[ -n ${only} ]]; then
-    if [[ ! $only =~ ^(vmware|virtualbox)$ ]]; then
+    if [[ ! $only =~ ^(vmware|virtualbox|parallels)$ ]]; then
       echo "$(basename $0): illegal platform $2"
-      echo "Valid platforms: vmware|virtualbox"
+      echo "Valid platforms: vmware|virtualbox|parallels"
       usage
       exit 1
     fi
@@ -40,6 +40,8 @@ args() {
     only=vmware-iso
   elif [[ "${only}" = "virtualbox" ]]; then
     only=virtualbox-iso
+  elif [[ "${only}" = "parallels" ]]; then
+    only=parallels-iso
   fi
 
   if [ -n "${only}" ]; then
