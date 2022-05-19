@@ -11,8 +11,8 @@ Pre-built boxes can be found here: [vagrantup](https://app.vagrantup.com/fasmat)
 ## Building the Vagrant boxes with Packer
 
 To build all the boxes, you will need [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and
-[VMware Fusion](https://www.vmware.com/products/fusion) or [VMware Workstation](https://www.vmware.com/products/workstation)
-installed.
+[VMware Fusion](https://www.vmware.com/products/fusion) / [VMware Workstation](https://www.vmware.com/products/workstation)
+and [Parallels Desktop](https://www.parallels.com/products/desktop/pro/) installed.
 
 We make use of JSON files containing packer templates to build specific versions of Ubuntu.
 For example, to build Ubuntu 22.04, use the following:
@@ -34,6 +34,7 @@ The templates currently support the following desktop virtualization strings:
   desktop virtualization
 * `vmware-iso` - [VMware Fusion](https://www.vmware.com/products/fusion) or
   [VMware Workstation](https://www.vmware.com/products/workstation) desktop virtualization
+* `parallels-iso`- [Parallels Desktop Pro](https://www.parallels.com/products/desktop/pro/) desktop virtualization
 
 ## Building the Vagrant boxes with the box script
 
