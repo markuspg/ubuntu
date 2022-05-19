@@ -119,6 +119,7 @@
         "script/update.sh",
         "script/vagrant.sh",
         "script/sshd.sh",
+        "script/parallels.sh",
         "script/vmware.sh",
         "script/virtualbox.sh",
         "{{ user `custom_script` }}",
