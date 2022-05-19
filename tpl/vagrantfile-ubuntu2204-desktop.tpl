@@ -26,4 +26,15 @@ Vagrant.configure("2") do |config|
     v.vmx["scsi0.virtualDev"] = "lsilogic"
     v.vmx["mks.enable3d"] = "TRUE"
   end
+
+  config.vm.provider :parallels do |p|
+    p.customize ["set", :id, "--startup-view", "window"]
+    p.linked_clone = true
+    p.memory = 4096
+    p.cpus = 4
+
+    p.customize ["set", :id, "--video-adapter-type", "virtio"]
+    p.customize ["set", :id, "--3d-accelerate", "highest"]
+    p.customize ["set", :id, "--sync-host-printers", "off"]
+  end
 end
