@@ -15,6 +15,9 @@ autoinstall:
         enp0s3:
           dhcp4: true
           dhcp-identifier: mac
+        enp0s5:
+          dhcp4: true
+          dhcp-identifier: mac
   storage:
     config:
       - { type: disk, ptable: gpt, path: /dev/sda, wipe: superblock, preserve: false, grub_device: true, id: disk }
