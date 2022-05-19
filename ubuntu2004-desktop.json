@@ -54,7 +54,7 @@
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_username": "{{ user `ssh_username` }}",
       "ssh_timeout": "10000s",
-      "ssh_handshake_attempts": "20",
+      "ssh_handshake_attempts": "200",
       "type": "parallels-iso",
       "vm_name": "{{ user `vm_name` }}",
       "parallels_tools_flavor": "lin",
